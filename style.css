@@ -2,18 +2,20 @@ body {
   font-family: Arial, sans-serif;
   margin: 0; 
   padding: 0;
-  background: #f5f5f5;
-  text-align: center; /* Center text globally */
+  background: #121212; /* Dark background */
+  color: #f5f5f5;      /* Light text */
+  text-align: center;
 }
 
 header {
-  background: #333; 
+  background: #1e1e1e; 
   color: #fff;
   padding: 1rem;
   display: flex; 
-  justify-content: center; /* Center header content */
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-bottom: 1px solid #333;
 }
 
 header h1 {
@@ -21,7 +23,7 @@ header h1 {
 }
 
 header nav a {
-  color: #fff; 
+  color: #bb86fc; /* Purple accent */
   text-decoration: none; 
   margin: 10px;
   font-weight: bold;
@@ -37,43 +39,48 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px; 
-  justify-items: center; /* Center product cards */
+  justify-items: center;
 }
 
 .product {
-  background: #fff; 
+  background: #1f1f1f; 
   padding: 15px; 
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   text-align: center;
   width: 220px;
+  border: 1px solid #333;
 }
 
 .product img {
   max-width: 100%; 
   height: auto;
+  border-radius: 5px;
 }
 
 .cart-item {
-  background: #fff;
+  background: #1f1f1f;
   padding: 15px;
   margin: 10px auto;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   max-width: 500px;
   text-align: center;
+  border: 1px solid #333;
 }
 
 button {
-  background: #007bff; 
-  color: white;
+  background: #bb86fc; /* Purple button */
+  color: #121212;
   border: none; 
   padding: 10px 15px;
   cursor: pointer; 
   border-radius: 5px;
   margin-top: 10px;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background: #0056b3;
+  background: #9a67ea;
 }

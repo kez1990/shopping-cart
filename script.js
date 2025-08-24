@@ -1,30 +1,61 @@
-const products = [
-  { id: 1, name: "Laptop", price: 999, image: "images/laptop.jpg" },
-  { id: 2, name: "Headphones", price: 199, image: "images/headphones.jpg" },
-  { id: 3, name: "Smartphone", price: 699, image: "images/phone.jpeg" },
-  { id: 4, name: "Smartwatch", price: 299, image: "images/watch.jpg" },
-  { id: 4, name: "Smartwatch", price: 10000, image: "images/ferrari.jpg" }
-];
+const products = {
+  electronics: [
+    { id: 1, name: "Laptop", price: 999, image: "images/laptop.jpg" },
+    { id: 2, name: "Headphones", price: 199, image: "images/headphones.jpg" },
+    { id: 3, name: "Smartphone", price: 699, image: "images/phone.jpeg" },
+    { id: 4, name: "Smartwatch", price: 299, image: "images/watch.jpg" },
+    { id: 5, name: "Tablet", price: 499, image: "images/tablet.jpg" }
+  ],
+  clothing: [
+    { id: 6, name: "T-Shirt", price: 29, image: "images/tshirt.jpg" },
+    { id: 7, name: "Jeans", price: 59, image: "images/jeans.jpeg" },
+    { id: 8, name: "Sneakers", price: 89, image: "images/sneakers.jpeg" },
+    { id: 9, name: "Jacket", price: 129, image: "images/jacket.jpeg" },
+    { id: 10, name: "Cap", price: 19, image: "images/cap.jpg" }
+  ],
+  cars: [
+    { id: 11, name: "Sedan", price: 20000, image: "images/sedan.jpg" },
+    { id: 12, name: "SUV", price: 35000, image: "images/suv.jpg" },
+    { id: 13, name: "Sports Car", price: 60000, image: "images/ferrari.jpg" },
+    { id: 14, name: "Truck", price: 45000, image: "images/truck.jpg" },
+    { id: 15, name: "Convertible", price: 55000, image: "images/convertible.jpg" }
+  ],
+  homewear: [
+    { id: 16, name: "Sofa", price: 799, image: "images/sofa.jpg" },
+    { id: 17, name: "Dining Table", price: 999, image: "images/diningtable.jpg" },
+    { id: 18, name: "Bed", price: 1200, image: "images/bed.jpg" },
+    { id: 19, name: "Lamp", price: 89, image: "images/lamp.jpeg" },
+    { id: 20, name: "Carpet", price: 199, image: "images/carpet.jpg" }
+  ]
+};
 
 function loadProducts() {
-  const productList = document.getElementById("product-list");
-  if (!productList) return;
+  Object.keys(products).forEach(category => {
+    const container = document.getElementById(category);
+    if (!container) return;
 
-  productList.innerHTML = products.map(p => `
-    <div class="product">
-      <img src="${p.image}" alt="${p.name}">
-      <h3>${p.name}</h3>
-      <p>$${p.price}</p>
-      <button onclick="addToCart(${p.id})">Add to Cart</button>
-    </div>
-  `).join("");
+    container.innerHTML = products[category].map(p => `
+      <div class="product">
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>$${p.price}</p>
+        <button onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>
+    `).join("");
+  });
 }
 
 function addToCart(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let product = products.find(p => p.id === id);
-  let item = cart.find(p => p.id === id);
 
+  // Find product across categories
+  let product;
+  for (let cat in products) {
+    product = products[cat].find(p => p.id === id);
+    if (product) break;
+  }
+
+  let item = cart.find(p => p.id === id);
   if (item) {
     item.qty++;
   } else {
